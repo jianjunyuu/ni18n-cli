@@ -15,11 +15,12 @@ npm install -g ni18n-cli
 Clone a copy of the repo:
 
 ```bash
-git clone xxx
+git clone https://github.com/mryujianjun/ni18n-cli.git
 ```
 
 ## Usage
 
 ```bash
 ni18n <command> <url>
+ni18n pack languaua.xlsx  --lang zh-CN,en
 ```
