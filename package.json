@@ -1,0 +1,21 @@
+{
+  "name": "ni18n-cli",
+  "version": "1.0.0",
+  "description": "Node js build multi-language package scaffolding",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mryujianjun.cn@gmail.com",
+  "license": "ISC",
+  "bin": {
+    "ni18n": "bin/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "chalk": "^4.0.0",
+    "commander": "^5.0.0",
+    "ora": "^4.0.3",
+    "xlsx": "^0.15.6"
+  }
+}
