@@ -1,10 +1,9 @@
 .DS_Store
 node_modules
-/dist
-
-# local env files
-.env.local
-.env.*.local
+/__test__/**/*.*
+!/__test__/**.xlsx
+!/__test__/**.xls
+!/__test__/**.csv
 
 # Log files
 npm-debug.log*
@@ -19,3 +18,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+

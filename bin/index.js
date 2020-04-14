@@ -1,20 +1,63 @@
 #!/usr/bin/env node
+
 const {program} = require('commander');
+const pck = require('../package');
 
 program
-	.version('0.0.1', '-v, --version', 'output the current version')
-	// .usage('<command> [options]');
-
-program
-	.command('pack <url|path>')
-	.description('packing')
-	// .option('-t, --type <type>', 'specify the file output type. default: json')
-	.option('-l, --lang <languages>', 'list of languages. default: zh-CN,en')
-	.option('-d, --dest <languages>', 'output directory. default: lang')
+	.version(pck.version, '-v, --version', 'output the current version')
+	.option('-t, --type <type>', 'specify the file output type.', 'json')
+	.option('-l, --lang <languages>', 'list of languages.', 'zh-CN,en')
+	.option('-d, --dest <directory>', 'output directory.', 'lang')
 	.option('--no-clear', 'don\'t clear directory.')
-	.action((url, cmd) => {
-		require('../lib/build')(url, cleanArgs(cmd))
+	.usage('[command] [options]');
+
+// 配置(.ni18nrc)
+// program
+// 	.command('config [key] [value]')
+// 	.option('-D, --delete', 'delete a prop')
+// 	.action((key, value, cmd) => {
+// 		require('../lib/commands/config')(key, value, cleanArgs(cmd));
+// 	});
+
+program
+	.command('init')
+	.action(() => {
+		require('../lib/commands/init')();
 	});
+
+// 第三方提供接口配置下载方式
+// program
+// 	.command('download')
+// 	.action((url, cmd) => {
+// 		require('../lib/commands/download')(cleanArgs(cmd.parent));
+// 	});
+
+// 读取远程链接（直接的Excel文件流）方式
+program
+	.command('curl <url>')
+	.action((url, cmd) => {
+		require('../lib/commands/curl')(url, cleanArgs(cmd.parent));
+	});
+
+// unknown commands
+program
+	.arguments('[path]')
+	.action((path, cmd) => {
+		if (path) {
+			require('../lib/commands/cpath')(path, cleanArgs(cmd));
+		} else {
+			require('../lib/commands/major')(cleanArgs(cmd));
+		}
+	});
+
+// add some useful info on help
+program.on('--help', () => {
+	console.log();
+	console.log(`Commands of arguments:`);
+	console.log(`  Major: ni18n`);
+	console.log(`  Cpath: ni18n language.xlsx or ni18n ./**/<Excel filename>.xlsx`);
+	console.log();
+});
 
 program.parse(process.argv);
 
