@@ -4,6 +4,7 @@ const {program} = require('commander');
 const pck = require('../package');
 
 program
+	.name('ni18n')
 	.version(pck.version, '-v, --version', 'output the current version')
 	.option('-t, --type <type>', 'specify the file output type.', 'json')
 	.option('-l, --lang <languages>', 'list of languages.', 'zh-CN,en')
